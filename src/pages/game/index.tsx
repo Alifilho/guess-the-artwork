@@ -17,7 +17,7 @@ const artists = [
   'Jackson Pollock',
 ];
 const Game: FC = () => {
-  const [answer, setAnswer] = useState('Jackson Pollock');
+  const [answer] = useState('Jackson Pollock');
 
   const toast = useToast();
 
