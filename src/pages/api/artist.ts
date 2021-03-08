@@ -18,4 +18,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
     await prisma.artist.deleteMany({});
     return res.status(200).json({ message: 'Database cleared' });
   }
+
+  if (req.method === 'GET') {
+    const artworks = await prisma.artist.findMany({});
+    return res.status(200).json({ artworks });
+  }
 };

@@ -15,4 +15,9 @@ export default async (req: NextApiRequest, res: NextApiResponse) => {
 
     res.status(200).json({ newArtwork });
   }
+
+  if (req.method === 'GET') {
+    const artworks = await prisma.artwork.findMany({});
+    return res.status(200).json({ artworks });
+  }
 };
