@@ -2,22 +2,12 @@ import { FC, useState } from 'react';
 
 import { Flex, Image, Button, Heading, useToast } from '@chakra-ui/react';
 
-const art = {
-  artistName: 'Jackson Pollock',
-  imageUrl:
-    'https://d32dm0rphc51dk.cloudfront.net/NwSWV2ah9kkXAuSxCkYvsw/large.jpg',
-  name: 'Untitled, 1075',
-  age: '1944',
-};
+import api from '@/services/api';
 
-const artists = [
-  'Leonard da Vinci',
-  'Tarsila do Amaral',
-  'Pablo Picasso',
-  'Jackson Pollock',
-];
-const Game: FC = () => {
-  const [answer] = useState('Jackson Pollock');
+import { GameProps } from '@/interfaces/components/game';
+
+const Game: FC = ({}: GameProps) => {
+  const [answer] = useState();
 
   const toast = useToast();
 
@@ -55,5 +45,11 @@ const Game: FC = () => {
     </Flex>
   );
 };
+
+export async function getStaticProps() {
+  const round = (await api.get('/clients')).data;
+
+  return { props: { round } };
+}
 
 export default Game;
